@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { allAsset, allWarehouse, makeOrder } from '../store/actions/AssetActions';
 import { useDispatch, useSelector } from "react-redux";
-import { allUser } from "../store/actions/AssetActions";
+import { allUser } from "../store/actions/UserActions";
+import img1 from "./images/order.jpg";
+import { useNavigate } from 'react-router-dom';
+import { allAsset } from '../store/actions/AssetActions';
+import { allWarehouse } from '../store/actions/WarehouseActions';
+import { makeOrder } from '../store/actions/OrderActions';
 
 
 export default function PlaceOrder() {
@@ -11,13 +15,15 @@ export default function PlaceOrder() {
     const [orderAssetQuantity, setOrderAssetQuantity] = useState([{ assetId: '', assetQuantity: '' }]);
     const [formErrors, setFormErrors] = useState({});
 
-    const users = useSelector(state => state.assetReducer.users);
+    const users = useSelector(state => state.orderReducer.users);
 
-    const warehouse = useSelector(state => state.assetReducer.warehouse);
+    const warehouse = useSelector(state => state.orderReducer.warehouse);
 
-    const assets = useSelector(state => state.assetReducer.assets);
+    const assets = useSelector(state => state.orderReducer.assets);
 
-    const newOrder = useSelector(state => state.assetReducer.newOrder);
+    const newOrder = useSelector(state => state.orderReducer.newOrder);
+
+    const navigate = useNavigate();
 
     const dispatch = useDispatch();
 
@@ -87,7 +93,7 @@ export default function PlaceOrder() {
             }
             console.log(payload);
             dispatch(makeOrder(payload));
-            alert("Order Successfully placed with id: " + newOrder.orderId);
+            alert("Order Successfully placed "+newOrder.orderId);
         }
     }
 
@@ -103,11 +109,13 @@ export default function PlaceOrder() {
         setOrderAssetQuantity(list);
     }
     return (
-        <div className='container'>
-            <h5>Place Order</h5>
+        <div >
+           
+        <div className='container-fluid' style={{backgroundImage:`url(${img1})`}}>
+        <h5 style={{fontFamily:"cursive"}} ><b><u>Move an Asset:</u></b></h5>
             <div class="form-group">
                 <div class="row-xs-2">
-                    <label>UserID</label>&nbsp;&nbsp;
+                    <label style={{color:"whitesmoke"}}><i>User ID</i></label>&nbsp;&nbsp;
                     <select className="form-control" onChange={e => setUserId(e.target.value)}>
                         <option>----Select----</option>
                         {
@@ -117,7 +125,7 @@ export default function PlaceOrder() {
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>From Warehouse Id</label>&nbsp;&nbsp;
+                    <label style={{color:"whitesmoke"}}><i>From Warehouse Id</i></label>&nbsp;&nbsp;
                     <select className="form-control" onChange={e => setFrmWId(e.target.value)}>
                         <option>From Warehouse Id</option>
                         {
@@ -131,7 +139,7 @@ export default function PlaceOrder() {
                     }
                 </div>
                 <div class="form-group">
-                    <label>To Warehouse Id</label>&nbsp;&nbsp;
+                    <label style={{color:"whitesmoke"}}><i>To Warehouse Id</i></label>&nbsp;&nbsp;
                     <select className="form-control" onChange={e => setToWId(e.target.value)}>
                         <option>To Warehouse Id</option>
                         {
@@ -149,7 +157,7 @@ export default function PlaceOrder() {
                         return (
                             <div>
                                 <div class="form-group">
-                                    <label>Asset Id</label>&nbsp;&nbsp;
+                                    <label style={{color:"whitesmoke"}}><i>Asset Id</i></label>&nbsp;&nbsp;
                                     <select name='assetId' className="form-control" onChange={e => handleChange(e, i)}>
                                         <option>Asset Id</option>
                                         {
@@ -164,7 +172,7 @@ export default function PlaceOrder() {
                                 </div>
 
                                 <div class="form-group">
-                                    <label htmlFor='assetQuantity'>Asset Quantity</label>
+                                    <label style={{color:"whitesmoke"}} htmlFor='assetQuantity'><i>Asset Quantity</i></label>
                                     <input className="form-control" type='text' placeholder='Asset Quantity' value={orderAssetQuantity.assetQuantity} name='assetQuantity' onChange={e => handleChange(e, i)} />
                                     {
                                         formErrors.assetQuantityError &&
@@ -174,22 +182,23 @@ export default function PlaceOrder() {
                                 {
                                     orderAssetQuantity.length !== 1 &&
                                     <div className='form-group'>
-                                        <button className='btn btn-danger' type="button" onClick={handleRemove} >Remove</button> &nbsp;&nbsp;
+                                        <button className='btn btn-danger' type="button" onClick={handleRemove}>Remove</button> &nbsp;&nbsp;
                                     </div>
                                 }
                                 {
                                     orderAssetQuantity.length - 1 == i &&
                                     <div className='form-group'>
-                                        <button className='btn btn-primary' type="button" onClick={addMoreItem} >Add Item</button> &nbsp;&nbsp;
+                                        <button className='btn btn-primary' type="button" style={{fontFamily:"cursive"}} onClick={addMoreItem}>Add Item</button> &nbsp;&nbsp;
                                     </div>
                                 }
-                                <button onClick={handleSubmit} className='btn btn-success'>Order</button> <br /><br />
+                                <button onClick={handleSubmit} className='btn btn-success' style={{fontFamily:"cursive"}}>Order</button> 
 
                             </div>
                         );
                     })}
             </div>
-
+                  <button className="btn btn-secondary" style={{fontFamily:"cursive"}} onClick={() => navigate(-1)}>Go Back</button>  
+        </div>
         </div>
     )
 }

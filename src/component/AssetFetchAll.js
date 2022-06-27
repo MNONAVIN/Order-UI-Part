@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { allAsset } from "../store/actions/AssetActions";
 
 export default function AssetFetchAll() {
-    const asset = useSelector(state => state.assetReducer.assets);
+    const asset = useSelector(state => state.orderReducer.assets);
 
     const dispatch = useDispatch();
 

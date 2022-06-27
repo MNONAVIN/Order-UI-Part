@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { allWarehouse } from '../store/actions/AssetActions';
+import { allWarehouse } from '../store/actions/WarehouseActions';
 
 export default function FetchAllWarehouse() {
     const warehouse = useSelector(state => state.assetReducer.warehouse);

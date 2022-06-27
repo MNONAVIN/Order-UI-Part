@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { allUser } from "../store/actions/AssetActions";
+import { allUser } from "../store/actions/UserActions";
 import { Link } from 'react-router-dom';
 
 function UserFetchAll() {
-    const users = useSelector(state => state.assetReducer.users);
+    const users = useSelector(state => state.ordertReducer.users);
 
     const dispatch = useDispatch();
 

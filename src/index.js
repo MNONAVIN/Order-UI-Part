@@ -11,7 +11,7 @@ const storeInstance = ConfigureStore();
 root.render(
   <React.StrictMode>
     <Provider store={storeInstance}>
-    <App />
+    <App/>
     </Provider>
   </React.StrictMode>
 );

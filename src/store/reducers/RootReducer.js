@@ -1,7 +1,6 @@
 import {combineReducers} from 'redux';
-import assetReducer from './AssetReducer';
-
+import orderReducer from './OrderReducer';
 const rootReducer=combineReducers({
-    assetReducer
+    orderReducer
 })
 export default rootReducer;

@@ -1,6 +1,5 @@
 import logo from './logo.svg';
 import './App.css';
-import { SaveOrder } from './store/actions/AssetActions';
 import {
   BrowserRouter as Router,
   Routes,
@@ -11,7 +10,7 @@ import UserFetchAll from './component/UserFetchAll';
 import FetchAllWarehouse from './component/FetchAllWarehouse';
 import AssetFetchAll from './component/AssetFetchAll';
 import FetchAllOrder from './component/FetchAllOrder';
-import OrderAll from './component/OrderAll';
+import OrderAll from './component/Order';
 import OrderById from './component/OrderById';
 
 function App() {
@@ -25,8 +24,8 @@ function App() {
           <Route path="/warehouse/all" element={<FetchAllWarehouse/>}/>
           <Route path="/asset/all" element={<AssetFetchAll/>}/>
           <Route path="/order/all" element={<FetchAllOrder/>}/>
-          <Route path="/order" element={<OrderAll/>}/>
-          <Route path="/order/byId/:id" element={<OrderById/>}/>
+          <Route path="/" element={<OrderAll/>}/>
+          <Route path="/order/find/:id" element={<OrderById/>}/>
         </Routes>
       </Router> 
        {/* <UserFetchAll/> */}
